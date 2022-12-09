@@ -42,7 +42,6 @@ class _ResultPageState extends ConsumerState<ResultPage>
             } else if (value == 2) {
               ref.read(algoProvider).SJFPreEmptive();
             }
-            print(value);
           },
           tabs: const [
             Tab(text: 'FCFS'),
@@ -122,37 +121,70 @@ class _ResultPageState extends ConsumerState<ResultPage>
                 Expanded(
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: processProvider.processList.length,
+                    itemCount: _controller.index == 1
+                        ? provider.sortedProcessList.length
+                        : processProvider.processList.length,
                     padding: const EdgeInsets.only(bottom: 100),
                     itemBuilder: (context, index) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: Text('P${index + 1}'),
+                      if (_controller.index == 1) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: Text('P${index + 1}'),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: Text(processProvider
-                                  .processList[index].arrivalTime
-                                  .toString()),
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: Text(provider
+                                    .sortedProcessList[index].arrivalTime
+                                    .toString()),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: Text(processProvider
-                                  .processList[index].processTime
-                                  .toInt()
-                                  .toString()),
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: Text(provider
+                                    .sortedProcessList[index].processTime
+                                    .toInt()
+                                    .toString()),
+                              ),
                             ),
-                          ),
-                        ],
-                      );
+                          ],
+                        );
+                      } else {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: Text('P${index + 1}'),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: Text(processProvider
+                                    .processList[index].arrivalTime
+                                    .toString()),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: Text(processProvider
+                                    .processList[index].processTime
+                                    .toInt()
+                                    .toString()),
+                              ),
+                            ),
+                          ],
+                        );
+                      }
                     },
                   ),
                 ),

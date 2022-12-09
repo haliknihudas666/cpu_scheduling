@@ -21,6 +21,9 @@ class AlgoProvider extends ChangeNotifier {
   final List<ProcessBar> _progressBar = [];
   List<ProcessBar> get progressBar => _progressBar;
 
+  List<ProcessModel> _sortedProcessList = [];
+  List<ProcessModel> get sortedProcessList => _sortedProcessList;
+
   double _waitTime = 0;
   double get waitTime => _waitTime;
 
@@ -107,22 +110,9 @@ class AlgoProvider extends ChangeNotifier {
           .withOpacity(1.0),
     );
 
+    processList.sort((a, b) => a.processTime.compareTo(b.processTime));
+
     processList.asMap().forEach((index, element) {
-      //Add Blank Process
-      if (element.arrivalTime > totalArrivalTime) {
-        int time = element.arrivalTime - totalArrivalTime;
-        _progressBar.add(
-          ProcessBar(
-            start: totalArrivalTime,
-            end: totalArrivalTime + time,
-            text: "",
-            color: Colors.grey,
-          ),
-        );
-
-        totalArrivalTime += time;
-      }
-
       if (element.arrivalTime < totalArrivalTime) {
         totalWait += totalArrivalTime - element.arrivalTime;
       }
@@ -147,6 +137,8 @@ class AlgoProvider extends ChangeNotifier {
 
     _burstTime = totalBurst.toDouble();
     _avgBurstTime = totalBurst / processList.length;
+
+    _sortedProcessList = processList;
 
     notifyListeners();
   }
