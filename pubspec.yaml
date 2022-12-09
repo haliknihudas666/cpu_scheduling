@@ -1,0 +1,24 @@
+name: cpu_scheduling
+description: Lab 6 Activity - CPU Scheduling for IIT408 Operating System.
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.4 <3.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.1.1
+  google_fonts: ^2.0.0
+  uuid: ^3.0.7
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
