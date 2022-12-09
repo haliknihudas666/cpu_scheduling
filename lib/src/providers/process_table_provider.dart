@@ -69,33 +69,7 @@ class ProcessTableProvider extends ChangeNotifier {
     ),
   ];
 
-  final List<ProcessModel> _processList = [
-    ProcessModel(
-      uuid: const Uuid().v4(),
-      arrivalTime: 0,
-      processTime: 16,
-    ),
-    ProcessModel(
-      uuid: const Uuid().v4(),
-      arrivalTime: 2,
-      processTime: 8,
-    ),
-    ProcessModel(
-      uuid: const Uuid().v4(),
-      arrivalTime: 5,
-      processTime: 2,
-    ),
-    ProcessModel(
-      uuid: const Uuid().v4(),
-      arrivalTime: 8,
-      processTime: 16,
-    ),
-    ProcessModel(
-      uuid: const Uuid().v4(),
-      arrivalTime: 11,
-      processTime: 3,
-    ),
-  ];
+  final List<ProcessModel> _processList = [];
   List<ProcessModel> get processList => _processList;
 
   void add({required int arrivalTime, required int processTime}) {
